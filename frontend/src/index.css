@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* ─── Global Reset & Font ───────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: #0f0f1a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
+    #0f0f1a;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cc0000;
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff4444;
+}
+
+/* ─── Pokéball BG Pattern ────────────────────────────── */
+.pokeball-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pokeball-bg::before,
+.pokeball-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.03);
+}
+
+.pokeball-bg::before {
+  width: 600px;
+  height: 600px;
+  top: -200px;
+  right: -200px;
+}
+
+.pokeball-bg::after {
+  width: 400px;
+  height: 400px;
+  bottom: -150px;
+  left: -100px;
+}
+
+/* ─── Glass Card ─────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Stat Bar Animated ───────────────────────────────── */
+@keyframes fillBar {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: var(--target-width);
+  }
+}
+
+.stat-bar-fill {
+  animation: fillBar 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ─── Float Animation ─────────────────────────────────── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.float-anim {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ─── Shimmer Skeleton ────────────────────────────────── */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.05) 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* ─── Glow Effects ───────────────────────────────────── */
+.glow-red {
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+}
+
+.glow-card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px var(--type-glow, rgba(220, 38, 38, 0.2));
+}
+
+/* ─── Type Badge Pills ────────────────────────────────── */
+.type-fire {
+  background: linear-gradient(135deg, #f97316, #dc2626);
+}
+
+.type-water {
+  background: linear-gradient(135deg, #38bdf8, #3b82f6);
+}
+
+.type-grass {
+  background: linear-gradient(135deg, #86efac, #16a34a);
+}
+
+.type-electric {
+  background: linear-gradient(135deg, #fde047, #f59e0b);
+  color: #1a1a1a;
+}
+
+.type-bug {
+  background: linear-gradient(135deg, #a3e635, #65a30d);
+}
+
+.type-normal {
+  background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+  color: #1a1a1a;
+}
+
+.type-ice {
+  background: linear-gradient(135deg, #bae6fd, #0284c7);
+}
+
+.type-poison {
+  background: linear-gradient(135deg, #c084fc, #7c3aed);
+}
+
+.type-ground {
+  background: linear-gradient(135deg, #fcd34d, #b45309);
+}
+
+.type-flying {
+  background: linear-gradient(135deg, #a5b4fc, #4f46e5);
+}
+
+.type-psychic {
+  background: linear-gradient(135deg, #f9a8d4, #db2777);
+}
+
+.type-rock {
+  background: linear-gradient(135deg, #d6d3d1, #78716c);
+}
+
+.type-ghost {
+  background: linear-gradient(135deg, #c4b5fd, #4c1d95);
+}
+
+.type-dragon {
+  background: linear-gradient(135deg, #818cf8, #1e1b4b);
+}
+
+.type-fight {
+  background: linear-gradient(135deg, #fca5a5, #991b1b);
+}
+
+.type-steel {
+  background: linear-gradient(135deg, #e2e8f0, #475569);
+}
+
+.type-fairy {
+  background: linear-gradient(135deg, #fecdd3, #be123c);
+}
+
+.type-dark {
+  background: linear-gradient(135deg, #4b5563, #111827);
+}
