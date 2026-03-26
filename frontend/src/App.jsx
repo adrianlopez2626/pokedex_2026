@@ -5,6 +5,12 @@ import Detail from './pages/Detail';
 import Battle from './pages/Battle';
 import { GiCrossedSwords } from 'react-icons/gi';
 
+import SalonFama from './components/SalonFama';
+import CapturarPokemon from './components/CapturarPokemon';
+import ColeccionEntrenador from './components/ColeccionEntrenador';
+import IntercambiarPokemon from './components/IntercambiarPokemon';
+import BuscadorConTiempo from './components/BuscadorConTiempo';
+
 // Pokéball SVG icon
 const PokeballIcon = () => (
   <svg viewBox="0 0 100 100" className="w-9 h-9" fill="none">
@@ -22,8 +28,17 @@ const PokeballIcon = () => (
 export default function App() {
   const location = useLocation();
 
+  const navLinks = [
+    { path: '/batalla', label: 'Batalla', icon: <GiCrossedSwords size={14} /> },
+    { path: '/capturar', label: 'Capturar', icon: '🎯' },
+    { path: '/coleccion', label: 'Colección', icon: '🎒' },
+    { path: '/intercambiar', label: 'Intercambiar', icon: '🤝' },
+    { path: '/salon-fama', label: 'Salón Fama', icon: '🏆' },
+    { path: '/buscar-tiempo', label: 'Test Index', icon: '⏱️' }
+  ];
+
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative text-white">
       <div className="pokeball-bg" aria-hidden="true" />
       <div className="fixed top-20 right-10 w-64 h-64 rounded-full opacity-5 pointer-events-none"
         style={{ background: 'radial-gradient(circle, #cc0000, transparent)' }} />
@@ -31,9 +46,9 @@ export default function App() {
         style={{ background: 'radial-gradient(circle, #4f46e5, transparent)' }} />
 
       {/* ── Navbar ──────────────────────────────────── */}
-      <nav className="sticky top-0 z-50 glass border-b border-white/10 shadow-lg shadow-black/30">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
+      <nav className="sticky top-0 z-50 glass border-b border-white/10 shadow-lg shadow-black/30 w-full overflow-x-auto">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between min-w-max gap-4">
+          <Link to="/" className="flex items-center gap-3 group shrink-0">
             <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
               <PokeballIcon />
             </motion.div>
@@ -47,21 +62,22 @@ export default function App() {
           </Link>
 
           <div className="flex items-center gap-3">
-            {/* Battle nav link */}
-            <Link to="/batalla">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-bold text-sm transition-all ${location.pathname === '/batalla'
-                    ? 'bg-red-600 text-white shadow-lg shadow-red-900/40'
-                    : 'glass border border-white/10 text-white/60 hover:text-white hover:border-red-500/30'
-                  }`}
-              >
-                <GiCrossedSwords size={14} /> Batalla
-              </motion.div>
-            </Link>
+            {navLinks.map((link) => (
+              <Link key={link.path} to={link.path}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center justify-center gap-2 px-3 py-2 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${location.pathname === link.path
+                      ? 'bg-red-600 text-white shadow-lg shadow-red-900/40'
+                      : 'glass border border-white/10 text-white/60 hover:text-white hover:border-red-500/30'
+                    }`}
+                >
+                  <span className="flex items-center justify-center">{link.icon}</span> {link.label}
+                </motion.div>
+              </Link>
+            ))}
 
-            <div className="hidden md:flex items-center gap-2 text-white/40 text-sm">
+            <div className="hidden lg:flex items-center gap-2 text-white/40 text-sm ml-4">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block" />
               <span className="font-semibold">Conectado</span>
             </div>
@@ -70,11 +86,17 @@ export default function App() {
       </nav>
 
       {/* ── Main Content ─────────────────────────────── */}
-      <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/pokemon/:id" element={<Detail />} />
           <Route path="/batalla" element={<Battle />} />
+
+          <Route path="/salon-fama" element={<SalonFama />} />
+          <Route path="/capturar" element={<CapturarPokemon />} />
+          <Route path="/coleccion" element={<ColeccionEntrenador />} />
+          <Route path="/intercambiar" element={<IntercambiarPokemon />} />
+          <Route path="/buscar-tiempo" element={<BuscadorConTiempo />} />
         </Routes>
       </main>
 
